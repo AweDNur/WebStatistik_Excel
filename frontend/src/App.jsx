@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import StatistikPage from './pages/StatistikPage'
-import InovasiPage from './pages/InovasiPage'
+import UmkmPage from './pages/UmkmPage'
 
 export default function App() {
   return (
@@ -17,7 +17,7 @@ export default function App() {
       {/* This is where the magic happens: mapping URLs to your Pages */}
       <Routes>
         <Route path="/statistik" element={<StatistikPage />} />
-        <Route path="/inovasi" element={<InovasiPage />} />
+        <Route path="/inovasi" element={<UmkmPage />} />
       </Routes>
     </BrowserRouter>
   )

@@ -37,8 +37,35 @@ export default function StatistikPage() {
   }, [])
 
   useEffect(() => {
-    loadData()
-  }, [loadData])
+    let ignore = false
+
+    async function initLoad() {
+      try {
+        const response = await fetch(API_URL)
+        const result = await response.json()
+        if (ignore) return
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || 'Gagal mengambil data.')
+        }
+
+        setData(result.data)
+      } catch (err) {
+        if (!ignore) {
+          setError(err.message || 'Backend tidak dapat dihubungi.')
+        }
+      } finally {
+        if (!ignore) {
+          setLoading(false)
+        }
+      }
+    }
+
+    initLoad()
+    return () => {
+      ignore = true
+    }
+  }, [])
 
   if (loading) {
     return (

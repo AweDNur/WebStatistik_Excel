@@ -1,46 +1,9 @@
-import React, { useState } from 'react';
-
-// Import your images here
-import fotoumkm1 from '../assets/fotoumkm1.jpg';
-import fotomadura1 from '../assets/fotomadura1.jpg';
-import fotomadura2 from '../assets/fotomadura2.jpeg';
-
-import fotohaircut1 from '../assets/fotohaircut1.png';
-import fotohaircut2 from '../assets/fotohaircut2.jpg';
-import fotohaircut3 from '../assets/fotohaircut3.jpg';
-
-import fotoumkmaksesoris1 from '../assets/fotoumkmaksesoris1.jpg';
-import fotoumkmaksesoris2 from '../assets/fotoumkmaksesoris2.jpg';
-import fotoumkmaksesoris3 from '../assets/fotoumkmaksesoris3.jpg';
-
+import { useState } from 'react';
+import { catalogItems } from '../data/portalData';
 
 const KatalogUmkm = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [activeImage, setActiveImage] = useState(null);
-
-  const catalogItems = [
-    { 
-      id: 1, 
-      title: 'Warung Madura', 
-      description: 'Warung Madura menyediakan berbagai kebutuhan sehari-hari, mulai dari sembako, makanan ringan, minuman, hingga kebutuhan rumah tangga dengan harga terjangkau dan pelayanan ramah. Praktis, lengkap, dan siap melayani kebutuhan Anda setiap hari.',
-      image: fotoumkm1,
-      images: [fotoumkm1, fotomadura1, fotomadura2] 
-    },
-    { 
-      id: 2, 
-      title: 'Barber', 
-      description: 'UMKM Barber menyediakan layanan pangkas rambut untuk pria dan anak-anak dengan berbagai pilihan model sesuai keinginan. Mengutamakan hasil rapi, pelayanan ramah, dan harga terjangkau.',
-      image: fotohaircut1,
-      images: [fotohaircut1, fotohaircut2, fotohaircut3] 
-    },
-    { 
-      id: 3, 
-      title: 'Toko Aksesoris', 
-      description: 'UMKM Aksesoris menyediakan berbagai pilihan aksesoris menarik, mulai dari gelang, kalung, cincin, hingga pernak-pernik unik dengan desain beragam dan harga terjangkau. Cocok untuk melengkapi penampilan maupun dijadikan hadiah.',
-      image: fotoumkmaksesoris1,
-      images: [fotoumkmaksesoris1, fotoumkmaksesoris2, fotoumkmaksesoris3] 
-    },
-  ];
 
   const handleCardClick = (item) => {
     setSelectedItem(item);

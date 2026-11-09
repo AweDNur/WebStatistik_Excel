@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Import the logos from your assets folder
 import logoSurabaya from '../assets/logo_surabaya.png';
 import logoBps from '../assets/logo_bps.png';

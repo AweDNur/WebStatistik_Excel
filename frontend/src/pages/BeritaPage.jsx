@@ -1,19 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Footer from '../components/Footer'
-
-const STORAGE_KEY = 'desa-cantik-berita'
-const dummyNews = [
-  ['Kegiatan Warga Kelurahan Nginden Jangkungan', 'Informasi kegiatan dan kabar terbaru dari lingkungan kelurahan.'],
-  ['Pengumuman Pelayanan Kelurahan', 'Simak informasi pelayanan publik dan pengumuman penting lainnya.'],
-  ['Kolaborasi untuk Warga yang Lebih Baik', 'Berita kolaborasi dan program yang bermanfaat bagi masyarakat.'],
-]
+import { getCombinedNews } from '../data/portalData'
 
 export default function BeritaPage() {
-  const [publishedNews, setPublishedNews] = useState([])
-
-  useEffect(() => {
-    setPublishedNews(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'))
-  }, [])
+  const [newsList] = useState(() => getCombinedNews())
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -42,12 +32,7 @@ export default function BeritaPage() {
               </p>
             </div>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-              {[...publishedNews, ...dummyNews.map(([title, excerpt], index) => ({
-                id: `dummy-${index}`,
-                title,
-                excerpt,
-                date: `${9 - index} November 2026`,
-              }))].map((item) => (
+              {newsList.map((item) => (
                 <article key={item.id} className="flex min-h-[270px] flex-col overflow-hidden rounded-2xl border border-gray-700/50 bg-gray-800 shadow-xl">
                   {item.cover ? <img src={item.cover} alt="" className="h-44 w-full object-cover" /> : <div className="flex h-44 items-center justify-center bg-[#2d333b] text-5xl text-gray-500">📰</div>}
                   <div className="flex flex-1 flex-col p-5">

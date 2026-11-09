@@ -11,7 +11,20 @@ export default function DonutChart({ data = [] }) {
   const total = rows.reduce((sum, row) => sum + Number(row.jumlah), 0)
   const radius = 65
   const circumference = 2 * Math.PI * radius
-  let offset = 0
+
+  const segments = rows.reduce((acc, row, index) => {
+    const value = Number(row.jumlah)
+    const length = total ? (value / total) * circumference : 0
+    const prevOffset = acc.length > 0 ? acc[acc.length - 1].nextOffset : 0
+    acc.push({
+      kategori: row.kategori,
+      length,
+      offset: prevOffset,
+      nextOffset: prevOffset + length,
+      color: colors[index % colors.length],
+    })
+    return acc
+  }, [])
 
   return (
     <div className="rounded-xl border border-[#495057] bg-[#343A40] p-5 text-white sm:p-6">
@@ -28,28 +41,20 @@ export default function DonutChart({ data = [] }) {
           role="img"
           aria-label="Diagram donat status perkawinan"
         >
-          {rows.map((row, index) => {
-            const value = Number(row.jumlah)
-            const length = total ? (value / total) * circumference : 0
-
-            const circle = (
-              <circle
-                key={row.kategori}
-                cx="90"
-                cy="90"
-                r={radius}
-                fill="none"
-                stroke={colors[index % colors.length]}
-                strokeWidth="27"
-                strokeDasharray={`${length} ${circumference - length}`}
-                strokeDashoffset={-offset}
-                transform="rotate(-90 90 90)"
-              />
-            )
-
-            offset += length
-            return circle
-          })}
+          {segments.map((seg) => (
+            <circle
+              key={seg.kategori}
+              cx="90"
+              cy="90"
+              r={radius}
+              fill="none"
+              stroke={seg.color}
+              strokeWidth="27"
+              strokeDasharray={`${seg.length} ${circumference - seg.length}`}
+              strokeDashoffset={-seg.offset}
+              transform="rotate(-90 90 90)"
+            />
+          ))}
 
           <text
             x="90"

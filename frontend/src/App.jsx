@@ -5,10 +5,10 @@ import {
   Music2,
 } from 'lucide-react'
 import StatistikPage from './pages/StatistikPage'
-import InovasiPage from './pages/InovasiPage'
 import BeritaPage from './pages/BeritaPage'
 import BeritaAdminPage from './pages/BeritaAdminPage'
 import logoSurabaya from './assets/logo_surabaya.png'
+import UmkmPage from './pages/UmkmPage'
 
 const menuItems = [
   { label: 'Beranda', to: '/statistik' },
@@ -62,6 +62,7 @@ function Navbar() {
   )
 }
 
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -70,9 +71,9 @@ export default function App() {
       {/* This is where the magic happens: mapping URLs to your Pages */}
       <Routes>
         <Route path="/statistik" element={<StatistikPage />} />
-        <Route path="/inovasi" element={<InovasiPage />} />
         <Route path="/berita" element={<BeritaPage />} />
         <Route path="/berita-admin" element={<BeritaAdminPage />} />
+        <Route path="/inovasi" element={<UmkmPage />} />
       </Routes>
     </BrowserRouter>
   )

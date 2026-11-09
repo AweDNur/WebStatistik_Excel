@@ -1,5 +1,5 @@
-const sectionTitle = 'text-lg font-bold text-[#0E3B38]'
-const mutedClass = 'text-xs text-[#6E6857]'
+const sectionTitle = 'text-lg font-bold text-white'
+const mutedClass = 'text-xs text-[#ADB5BD]'
 
 export default function Section({ title, description, children }) {
   return (

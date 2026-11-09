@@ -60,17 +60,17 @@ export default function KpiCards({ data }) {
       {items.map((item) => (
         <div
           key={item.label}
-          className="rounded-[10px] border border-[#E1DACB] bg-white p-5"
+          className="rounded-[10px] border border-[#495057] bg-[#343A40] p-5 text-white"
         >
-          <div className="text-2xl font-extrabold text-[#0E3B38]">
+          <div className="text-2xl font-extrabold text-white">
             {item.value}
           </div>
 
-          <div className="mt-1 text-[12px] text-[#6E6857]">
+          <div className="mt-1 text-[12px] text-[#ADB5BD]">
             {item.label}
           </div>
 
-          <span className="mt-2 inline-block rounded-full bg-[#F4E3DA] px-2 py-0.5 text-[11px] font-bold text-[#C4633B]">
+          <span className="mt-2 inline-block rounded-full bg-[#F4E3DA] px-2 py-0.5 text-[11px] font-bold text-[#E65C00]">
             {item.tag}
           </span>
         </div>

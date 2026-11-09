@@ -16,11 +16,11 @@ export default function PopulationPyramid({ data = [] }) {
   )
 
   return (
-    <div className="rounded-xl border border-[#E1DACB] bg-white p-5 sm:p-6">
+    <div className="rounded-xl border border-[#495057] bg-[#343A40] p-5 text-white sm:p-6">
       <Legend />
 
       {rows.length === 0 ? (
-        <p className="text-sm text-[#6E6857]">Data kelompok usia belum tersedia.</p>
+        <p className="text-sm text-[#ADB5BD]">Data kelompok usia belum tersedia.</p>
       ) : (
         <div className="space-y-1">
           {rows.map((row) => (
@@ -31,7 +31,7 @@ export default function PopulationPyramid({ data = [] }) {
               <div className="flex h-6 justify-end">
                 <div
                   title={`Laki-laki ${row.kategori}: ${fmt(row.laki_laki)}`}
-                  className="flex h-full items-center justify-start overflow-hidden rounded-l-sm bg-[#1F5C57] pl-1 text-[9px] font-semibold text-white sm:pl-2 sm:text-[10px]"
+                  className="flex h-full items-center justify-start overflow-hidden rounded-l-sm bg-[#4379F2] pl-1 text-[9px] font-semibold text-white sm:pl-2 sm:text-[10px]"
                   style={{
                     width: `${(Number(row.laki_laki) / max) * 100}%`,
                     minWidth: 2,
@@ -41,14 +41,14 @@ export default function PopulationPyramid({ data = [] }) {
                 </div>
               </div>
 
-              <div className="text-center text-[10px] text-[#6E6857] sm:text-[11px]">
+              <div className="text-center text-[10px] text-[#ADB5BD] sm:text-[11px]">
                 {row.kategori}
               </div>
 
               <div className="flex h-6 justify-start">
                 <div
                   title={`Perempuan ${row.kategori}: ${fmt(row.perempuan)}`}
-                  className="flex h-full items-center justify-end overflow-hidden rounded-r-sm bg-[#C4633B] pr-1 text-[9px] font-semibold text-white sm:pr-2 sm:text-[10px]"
+                  className="flex h-full items-center justify-end overflow-hidden rounded-r-sm bg-[#E65C00] pr-1 text-[9px] font-semibold text-white sm:pr-2 sm:text-[10px]"
                   style={{
                     width: `${(Number(row.perempuan) / max) * 100}%`,
                     minWidth: 2,

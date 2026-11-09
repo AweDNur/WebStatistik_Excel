@@ -7,6 +7,7 @@ import {
 import StatistikPage from './pages/StatistikPage'
 import InovasiPage from './pages/InovasiPage'
 import BeritaPage from './pages/BeritaPage'
+import BeritaAdminPage from './pages/BeritaAdminPage'
 import logoSurabaya from './assets/logo_surabaya.png'
 
 const menuItems = [
@@ -71,6 +72,7 @@ export default function App() {
         <Route path="/statistik" element={<StatistikPage />} />
         <Route path="/inovasi" element={<InovasiPage />} />
         <Route path="/berita" element={<BeritaPage />} />
+        <Route path="/berita-admin" element={<BeritaAdminPage />} />
       </Routes>
     </BrowserRouter>
   )

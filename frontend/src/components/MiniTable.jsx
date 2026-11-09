@@ -1,5 +1,5 @@
 export default function MiniTable({ title, headers, rows }) {
-  const cardClass = 'rounded-xl border border-[#E1DACB] bg-white p-5 sm:p-6'
+  const cardClass = 'rounded-xl border border-[#495057] bg-[#343A40] p-5 text-white sm:p-6'
 
   return (
     <div className={cardClass}>
@@ -12,7 +12,7 @@ export default function MiniTable({ title, headers, rows }) {
               {headers.map((header) => (
                 <th
                   key={header}
-                  className="border-b border-[#E1DACB] px-2 py-2 text-left font-semibold text-[#6E6857]"
+                  className="border-b border-[#495057] px-2 py-2 text-left font-semibold text-[#ADB5BD]"
                 >
                   {header}
                 </th>
@@ -29,7 +29,7 @@ export default function MiniTable({ title, headers, rows }) {
                 {row.map((cell, j) => (
                   <td
                     key={`${i}-${j}`}
-                    className="border-b border-[#E1DACB] px-2 py-2 last:whitespace-nowrap"
+                  className="border-b border-[#495057] px-2 py-2 last:whitespace-nowrap"
                   >
                     {cell}
                   </td>

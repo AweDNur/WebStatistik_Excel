@@ -42,14 +42,14 @@ export default function StatistikPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#F4F0E6] text-[#132A2E]">
+      <div className="flex min-h-screen items-center justify-center bg-[#212529] text-white">
         Memuat data demografi...
       </div>
     )
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-[#212529]">
       <Hero total={data?.Ringkasan?.[0]?.jumlah ?? 0} />
 
       <main className="mx-auto max-w-[1180px] px-4 pb-16 sm:px-6">
@@ -66,7 +66,7 @@ export default function StatistikPage() {
             </button>
           </div>
         ) : !data || Object.values(data).every((rows) => rows.length === 0) ? (
-          <div className="mb-6 rounded-lg border border-[#E1DACB] bg-white p-4 text-sm">
+          <div className="mb-6 rounded-lg border border-[#495057] bg-[#343A40] p-4 text-sm text-white">
             Belum ada data. Silakan upload file Excel terlebih dahulu.
           </div>
         ) : (
@@ -113,11 +113,11 @@ export default function StatistikPage() {
           </>
         )}
 
-        <footer className="border-t border-[#E1DACB] pt-5 text-center text-[11px] text-[#6E6857]">
+        <footer className="border-t border-[#495057] pt-5 text-center text-[11px] text-[#ADB5BD]">
           Sumber data: Data DKB Semester I Tahun 2026, Dispendukcapil Kota
           Surabaya — Kelurahan Nginden Jangkungan, Kec. Sukolilo.
         </footer>
       </main>
-    </>
+    </div>
   )
 }

@@ -15,10 +15,10 @@ export default function MaritalBarChart({ data = [] }) {
   )
 
   return (
-    <div className="rounded-xl border border-[#E1DACB] bg-white p-5 sm:p-6">
+    <div className="rounded-xl border border-[#495057] bg-[#343A40] p-5 text-white sm:p-6">
       <h3 className="mb-1 text-sm font-semibold">Perbandingan antar status</h3>
 
-      <p className="mb-3 text-xs text-[#6E6857]">
+      <p className="mb-3 text-xs text-[#ADB5BD]">
         Jumlah jiwa per kategori, dipilah laki-laki dan perempuan
       </p>
 
@@ -34,7 +34,7 @@ export default function MaritalBarChart({ data = [] }) {
 
             <div className="flex h-5 overflow-hidden rounded">
               <div
-                className="flex items-center justify-center bg-[#1F5C57] text-[10px] text-white"
+                className="flex items-center justify-center bg-[#4379F2] text-[10px] text-white"
                 style={{ width: `${(Number(row.laki_laki) / max) * 100}%` }}
                 title={`Laki-laki: ${fmt(row.laki_laki)}`}
               >
@@ -42,7 +42,7 @@ export default function MaritalBarChart({ data = [] }) {
               </div>
 
               <div
-                className="flex items-center justify-center bg-[#C4633B] text-[10px] text-white"
+                className="flex items-center justify-center bg-[#E65C00] text-[10px] text-white"
                 style={{ width: `${(Number(row.perempuan) / max) * 100}%` }}
                 title={`Perempuan: ${fmt(row.perempuan)}`}
               >

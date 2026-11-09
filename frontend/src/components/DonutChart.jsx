@@ -1,6 +1,6 @@
 import Callout from './Callout'
 
-const colors = ['#7FA79D', '#1F5C57', '#D8A34B', '#C4633B']
+const colors = ['#4379F2', '#E65C00']
 const fmt = (n) => Number(n).toLocaleString('id-ID')
 
 export default function DonutChart({ data = [] }) {
@@ -14,10 +14,10 @@ export default function DonutChart({ data = [] }) {
   let offset = 0
 
   return (
-    <div className="rounded-xl border border-[#E1DACB] bg-white p-5 sm:p-6">
+    <div className="rounded-xl border border-[#495057] bg-[#343A40] p-5 text-white sm:p-6">
       <h3 className="mb-1 text-sm font-semibold">Komposisi total</h3>
 
-      <p className="mb-4 text-xs text-[#6E6857]">
+      <p className="mb-4 text-xs text-[#ADB5BD]">
         Proporsi berdasarkan data status perkawinan
       </p>
 
@@ -83,7 +83,7 @@ export default function DonutChart({ data = [] }) {
 
               <span>
                 {row.kategori}
-                <span className="block text-[#6E6857]">
+                <span className="block text-[#ADB5BD]">
                   {fmt(row.jumlah)} (
                   {total
                     ? (Number(row.jumlah) / total * 100).toLocaleString(

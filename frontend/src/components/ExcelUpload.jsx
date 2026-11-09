@@ -59,13 +59,13 @@ export default function ExcelUpload({ onSuccess }) {
   return (
     <form
       onSubmit={handleUpload}
-      className="mb-8 rounded-xl border border-[#E1DACB] bg-white p-5 sm:p-6"
+      className="mb-8 rounded-xl border border-[#495057] bg-[#343A40] p-5 text-white sm:p-6"
     >
-      <h2 className="mb-2 text-lg font-bold text-[#0E3B38]">
+      <h2 className="mb-2 text-lg font-bold text-white">
         Upload Data Excel
       </h2>
 
-      <p className="mb-4 text-sm text-[#6E6857]">
+      <p className="mb-4 text-sm text-[#ADB5BD]">
         Pilih file Excel (.xlsx atau .xls) untuk memperbarui data demografi.
       </p>
 
@@ -73,13 +73,13 @@ export default function ExcelUpload({ onSuccess }) {
         type="file"
         accept=".xlsx,.xls"
         onChange={(e) => setFile(e.target.files?.[0] || null)}
-        className="mb-4 block w-full rounded-lg border border-[#E1DACB] p-2 text-sm"
+        className="mb-4 block w-full rounded-lg border border-[#6C757D] bg-[#495057] p-2 text-sm text-white"
       />
 
       <button
         type="submit"
         disabled={loading}
-        className="rounded-lg bg-[#245B50] px-5 py-2.5 font-medium text-white hover:bg-[#19483F] disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded-lg bg-white px-5 py-2.5 font-medium text-black hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading ? 'Mengunggah...' : 'Upload Excel'}
       </button>
@@ -87,7 +87,7 @@ export default function ExcelUpload({ onSuccess }) {
       {message && (
         <p
           className={`mt-3 text-sm ${
-            isError ? 'text-red-600' : 'text-[#1F5C57]'
+            isError ? 'text-red-600' : 'text-[#A16207]'
           }`}
           role="status"
         >

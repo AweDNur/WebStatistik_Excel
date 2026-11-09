@@ -21,6 +21,7 @@ import logoBps from '../assets/logo_bps.png'
 import logoTelkom from '../assets/logo_telu_sby.png'
 
 const API_URL = 'http://localhost:3000/api/excel/data'
+const MAX_PREVIEW_ITEMS = 8
 
 const FALLBACK_DEMOGRAFI = {
   Ringkasan: [
@@ -126,26 +127,31 @@ export default function BerandaPage() {
 
   const totalPenduduk = demografi?.Ringkasan?.[0]?.jumlah ?? 0
 
+  // Batasi cuplikan Berita Terbaru di Beranda maksimal 8 berita terbaru agar indikator tidak penuh (crowded)
+  const latestNews = newsItems.slice(0, MAX_PREVIEW_ITEMS)
+
   // Rolling navigation handlers for UMKM
   const handlePrevUmkm = () => {
+    if (!catalogItems.length) return
     setUmkmIndex((prev) => (prev - 1 + catalogItems.length) % catalogItems.length)
   }
   const handleNextUmkm = () => {
+    if (!catalogItems.length) return
     setUmkmIndex((prev) => (prev + 1) % catalogItems.length)
   }
 
-  // Rolling navigation handlers for Berita
+  // Rolling navigation handlers for Berita Terbaru
   const handlePrevNews = () => {
-    if (!newsItems.length) return
-    setNewsIndex((prev) => (prev - 1 + newsItems.length) % newsItems.length)
+    if (!latestNews.length) return
+    setNewsIndex((prev) => (prev - 1 + latestNews.length) % latestNews.length)
   }
   const handleNextNews = () => {
-    if (!newsItems.length) return
-    setNewsIndex((prev) => (prev + 1) % newsItems.length)
+    if (!latestNews.length) return
+    setNewsIndex((prev) => (prev + 1) % latestNews.length)
   }
 
   const visibleUmkm = getRollingWindow(catalogItems, umkmIndex, 4)
-  const visibleNews = getRollingWindow(newsItems, newsIndex, 4)
+  const visibleNews = getRollingWindow(latestNews, newsIndex, 4)
 
   return (
     <div className="flex min-h-screen flex-col bg-[#1f2328] text-white font-sans">
@@ -651,7 +657,7 @@ export default function BerandaPage() {
 
         {/* Rolling Indicator Dots */}
         <div className="mt-6 flex items-center justify-center gap-2">
-          {newsItems.map((item, idx) => (
+          {latestNews.map((item, idx) => (
             <button
               key={item.id}
               type="button"

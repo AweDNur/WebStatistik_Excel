@@ -5,7 +5,7 @@ const validRows = (rows = []) =>
     (row) => !row.kategori.trim().toUpperCase().startsWith('JUMLAH TOTAL'),
   )
 
-export default function KpiCards({ data }) {
+export default function KpiCards({ data, isLight = false }) {
   const summary = data?.Ringkasan?.[0] ?? {}
   const ageRows = validRows(data?.['Kelompok Usia'])
   const maritalRows = validRows(data?.['Status Kawin'])
@@ -60,17 +60,29 @@ export default function KpiCards({ data }) {
       {items.map((item) => (
         <div
           key={item.label}
-          className="rounded-[10px] border border-[#495057] bg-[#343A40] p-5 text-white"
+          className={`rounded-xl border p-5 transition-all sm:p-6 ${
+            isLight
+              ? 'border-slate-300 bg-white text-slate-900 ring-1 ring-indigo-950/5 shadow-[0_8px_24px_-6px_rgba(30,27,75,0.12)]'
+              : 'border-[#495057] bg-[#343A40] text-white'
+          }`}
         >
-          <div className="text-2xl font-extrabold text-white">
+          <div
+            className={`text-2xl font-extrabold sm:text-3xl ${
+              isLight ? 'text-indigo-950' : 'text-white'
+            }`}
+          >
             {item.value}
           </div>
 
-          <div className="mt-1 text-[12px] text-[#ADB5BD]">
+          <div
+            className={`mt-1.5 text-sm font-medium ${
+              isLight ? 'text-slate-600' : 'text-[#DEE2E6]'
+            }`}
+          >
             {item.label}
           </div>
 
-          <span className="mt-2 inline-block rounded-full bg-[#F4E3DA] px-2 py-0.5 text-[11px] font-bold text-[#E65C00]">
+          <span className="mt-3 inline-block rounded-full bg-[#F4E3DA] px-3 py-1 text-xs font-bold text-[#E65C00]">
             {item.tag}
           </span>
         </div>

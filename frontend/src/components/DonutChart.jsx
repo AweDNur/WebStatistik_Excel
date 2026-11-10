@@ -1,9 +1,16 @@
 import Callout from './Callout'
 
-const colors = ['#4379F2', '#E65C00']
+const defaultColors = ['#4379F2', '#E65C00']
 const fmt = (n) => Number(n).toLocaleString('id-ID')
 
-export default function DonutChart({ data = [] }) {
+export default function DonutChart({
+  data = [],
+  title = 'Komposisi total',
+  subtitle = 'Proporsi berdasarkan data status perkawinan',
+  calloutText = 'Diagram memperlihatkan proporsi setiap kategori status perkawinan berdasarkan data Excel yang diunggah.',
+  palette = defaultColors,
+  isLight = false,
+}) {
   const rows = data.filter(
     (row) => !row.kategori.trim().toUpperCase().startsWith('JUMLAH TOTAL'),
   )
@@ -21,93 +28,110 @@ export default function DonutChart({ data = [] }) {
       length,
       offset: prevOffset,
       nextOffset: prevOffset + length,
-      color: colors[index % colors.length],
+      color: palette[index % palette.length],
     })
     return acc
   }, [])
 
   return (
-    <div className="rounded-xl border border-[#495057] bg-[#343A40] p-5 text-white sm:p-6">
-      <h3 className="mb-1 text-sm font-semibold">Komposisi total</h3>
+    <div
+      className={`flex h-full flex-col justify-between rounded-xl border p-5 transition-all sm:p-6 ${
+        isLight
+          ? 'border-slate-300 bg-white text-slate-900 ring-1 ring-indigo-950/5 shadow-[0_8px_24px_-6px_rgba(30,27,75,0.12)]'
+          : 'border-[#495057] bg-[#343A40] text-white'
+      }`}
+    >
+      <div>
+        <h3 className="mb-1 text-base font-bold sm:text-lg">{title}</h3>
 
-      <p className="mb-4 text-xs text-[#ADB5BD]">
-        Proporsi berdasarkan data status perkawinan
-      </p>
-
-      <div className="flex flex-wrap items-center justify-center gap-4">
-        <svg
-          viewBox="0 0 180 180"
-          className="w-full max-w-[180px]"
-          role="img"
-          aria-label="Diagram donat status perkawinan"
+        <p
+          className={`mb-5 text-sm ${
+            isLight ? 'text-slate-500' : 'text-[#CED4DA]'
+          }`}
         >
-          {segments.map((seg) => (
-            <circle
-              key={seg.kategori}
-              cx="90"
-              cy="90"
-              r={radius}
-              fill="none"
-              stroke={seg.color}
-              strokeWidth="27"
-              strokeDasharray={`${seg.length} ${circumference - seg.length}`}
-              strokeDashoffset={-seg.offset}
-              transform="rotate(-90 90 90)"
-            />
-          ))}
+          {subtitle}
+        </p>
 
-          <text
-            x="90"
-            y="87"
-            textAnchor="middle"
-            fontSize="19"
-            fontWeight="800"
-            fill="#132A2E"
+        <div className="flex flex-wrap items-center justify-center gap-6 py-2">
+          <svg
+            viewBox="0 0 180 180"
+            className="w-full max-w-[200px] shrink-0"
+            role="img"
+            aria-label={title}
           >
-            {fmt(total)}
-          </text>
-
-          <text
-            x="90"
-            y="104"
-            textAnchor="middle"
-            fontSize="10"
-            fill="#6E6857"
-          >
-            total jiwa
-          </text>
-        </svg>
-
-        <div className="space-y-3">
-          {rows.map((row, index) => (
-            <div key={row.kategori} className="flex items-start gap-2 text-xs">
-              <span
-                className="mt-0.5 h-3 w-3 shrink-0 rounded-sm"
-                style={{ background: colors[index % colors.length] }}
+            {segments.map((seg) => (
+              <circle
+                key={seg.kategori}
+                cx="90"
+                cy="90"
+                r={radius}
+                fill="none"
+                stroke={seg.color}
+                strokeWidth="27"
+                strokeDasharray={`${seg.length} ${circumference - seg.length}`}
+                strokeDashoffset={-seg.offset}
+                transform="rotate(-90 90 90)"
               />
+            ))}
 
-              <span>
-                {row.kategori}
-                <span className="block text-[#ADB5BD]">
-                  {fmt(row.jumlah)} (
-                  {total
-                    ? (Number(row.jumlah) / total * 100).toLocaleString(
-                        'id-ID',
-                        { maximumFractionDigits: 1 },
-                      )
-                    : '0'}
-                  %)
+            <text
+              x="90"
+              y="86"
+              textAnchor="middle"
+              fontSize="20"
+              fontWeight="800"
+              fill={isLight ? '#1E1B4B' : '#FFFFFF'}
+            >
+              {fmt(total)}
+            </text>
+
+            <text
+              x="90"
+              y="105"
+              textAnchor="middle"
+              fontSize="11"
+              fill={isLight ? '#64748B' : '#CED4DA'}
+            >
+              total jiwa
+            </text>
+          </svg>
+
+          <div className="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
+            {rows.map((row, index) => (
+              <div key={row.kategori} className="flex items-start gap-2.5 text-sm">
+                <span
+                  className="mt-1 h-3.5 w-3.5 shrink-0 rounded-sm border border-black/10"
+                  style={{ background: palette[index % palette.length] }}
+                />
+
+                <span
+                  className={`font-medium leading-snug ${
+                    isLight ? 'text-slate-800' : 'text-white'
+                  }`}
+                >
+                  {row.kategori}
+                  <span
+                    className={`block text-xs font-normal ${
+                      isLight ? 'text-slate-500' : 'text-[#CED4DA]'
+                    }`}
+                  >
+                    {fmt(row.jumlah)} (
+                    {total
+                      ? ((Number(row.jumlah) / total) * 100).toLocaleString(
+                          'id-ID',
+                          { maximumFractionDigits: 1 },
+                        )
+                      : '0'}
+                    %)
+                  </span>
                 </span>
-              </span>
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      <Callout>
-        Diagram memperlihatkan proporsi setiap kategori status perkawinan
-        berdasarkan data Excel yang diunggah.
-      </Callout>
+      <Callout>{calloutText}</Callout>
     </div>
   )
 }
